@@ -7,6 +7,12 @@ document.getElementById("contact-form").addEventListener("click", async function
   const message = document.getElementById("message").value.trim();
   const phone = document.getElementById("phone").value.trim();
 
+
+   if (!name || !email || !message || !phone) {
+    alert("Por favor, preencha todos os campos.");
+    return;
+  }
+
   
   const url = "https://n8n.loto3.vsilva.tec.br/webhook/44082d30-47ee-4efa-aaba-635e1f2f5e08";
 
@@ -19,6 +25,17 @@ document.getElementById("contact-form").addEventListener("click", async function
     });
 
     console.log("Response:", response);
+    if (response.ok) {
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("message").value = "";
+        document.getElementById("phone").value = "";
+
+        alert("Mensagem enviada com sucesso!");
+        setTimeout(() => {
+        location.reload();
+      }, 1000);
+    }
     
   } catch (error) {
     console.error("Erro:", error);
